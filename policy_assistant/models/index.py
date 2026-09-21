@@ -6,7 +6,7 @@ from langchain_core.embeddings import Embeddings
 from langchain_core.vectorstores import InMemoryVectorStore
 
 from policy_assistant.config import DOCS_DIR
-from policy_assistant.ingest.loader import load_chunks
+from policy_assistant.loader import load_chunks
 from policy_assistant.models.embed import get_embed_model
 
 

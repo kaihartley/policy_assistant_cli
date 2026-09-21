@@ -1,5 +1,5 @@
 from policy_assistant.config import DOCS_DIR
-from policy_assistant.ingest.loader import load_chunks, load_documents
+from policy_assistant.loader import load_chunks, load_documents
 
 
 def test_documents_load_from_files():

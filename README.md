@@ -21,14 +21,6 @@ A command-line assistant that answers questions about company policy from the do
 | `EMBED_MODEL_ID` | the embedding model id |
 | `BEDROCK_MAX_TOKENS` | optional, defaults to 600 |
 
-## Run
-
-```
-python -m policy_assistant.graph.run
-```
-
-Type a question at the prompt. Press Ctrl+C to quit.
-
 ## Tests
 
 ```
@@ -36,6 +28,12 @@ pytest
 ```
 
 ![PYTEST](screenshots/image-2.png)
+
+## Run
+
+```
+python -m policy_assistant.graph.run
+```
 
 ## Example runs
 
@@ -93,3 +91,11 @@ Each question gets at most 3 searches (`MAX_ATTEMPTS` in `config.py`): the first
 The `attempts` counter is kept in the state and goes up by one on every search. The routing function only sends a weak result back to `reframe` while `attempts` is below the limit, so once the limit is reached there is no path back to `reframe` and the graph must end.
 
 When the assistant runs out of attempts it replies: "I don't know. I couldn't find anything in the policy documents that answers that question."
+
+
+## Other design details
+
+- **Per-question reset:** the `intake` node clears the accumulating fields (queries tried, retrieved chunks) at the start of each question, so evidence doesn't leak between turns.
+- **Multi-turn:** an in-memory checkpointer with one thread id per session keeps the conversation. The `condense` node rewrites follow-up questions as standalone questions before searching.
+- **Safety net on the bound:** the graph run is capped at 25 steps, on top of the 3-search limit.
+- **Testability:** routing and the retry bound are pure functions in `rules/`. The tests need no AWS or network.

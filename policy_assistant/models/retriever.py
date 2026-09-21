@@ -2,7 +2,7 @@ from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 
 from policy_assistant.config import DEFAULT_RETRIEVER_K
-from policy_assistant.ingest.index import get_local_store
+from policy_assistant.models.index import get_local_store
 
 
 def search(

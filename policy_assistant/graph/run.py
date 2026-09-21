@@ -6,7 +6,7 @@ from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnableConfig
 
 from policy_assistant.graph.graph import build_graph_with_memory
-from policy_assistant.ingest.index import get_local_store
+from policy_assistant.models.index import get_local_store
 
 
 def print_steps(app, graph_state: dict, config: RunnableConfig) -> None:
