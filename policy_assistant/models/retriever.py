@@ -11,7 +11,7 @@ def search(
     k: int = DEFAULT_RETRIEVER_K,
     store: InMemoryVectorStore | None = None,
 ) -> list[tuple[Document, float]]:
-    """ Top-k (chunk, similarity) pairs, best first. Scores let the graph judge 'weak'. """
+    """ Top-k (chunk, similarity) pairs, best first """
     store = store or get_local_store()
     return store.similarity_search_with_score(query, k=k)
 

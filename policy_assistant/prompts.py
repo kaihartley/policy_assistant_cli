@@ -10,7 +10,7 @@ Reply with the question text only. No explanation, no quotes."""
 REFRAME_PROMPT = """A search over company policy documents returned nothing useful.
 
 Write ONE better search query for the same question, using different, broader
-keywords and likely synonyms. The documents are organised by topic -- things like
+keywords and likely synonyms. The documents are organized by topic -- things like
 "return window", "restocking fee", "shipping times", "billing and seats".
 
 Reply with the query text only. No explanation, no quotes."""

@@ -1,8 +1,4 @@
-""" The LLM steps as small chains: prompt | model (| parser).
-
-    Each builder takes an optional chat model. Leave it out to use Bedrock;
-    pass a stub in tests so nothing touches AWS.
-"""
+""" chains: prompt | model | parser """
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser

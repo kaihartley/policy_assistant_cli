@@ -7,5 +7,4 @@ from policy_assistant.graph.state import AgentState
 
 
 def refuse(state: AgentState) -> dict:
-    """ The searches ran out of attempts without finding anything good enough. """
     return {"messages": [AIMessage(content=REFUSAL_MESSAGE)]}

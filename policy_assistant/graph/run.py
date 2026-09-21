@@ -1,4 +1,4 @@
-""" Chat with the assistant in the terminal: python -m policy_assistant.graph.run """
+""" Chat with the assistant in the terminal """
 
 import uuid
 
@@ -10,7 +10,6 @@ from policy_assistant.ingest.index import get_local_store
 
 
 def print_steps(app, graph_state: dict, config: RunnableConfig) -> None:
-    """ Stream the graph and show which node ran and what it wrote to the state. """
     for chunk in app.stream(graph_state, config, stream_mode="updates"):
         for node, update in chunk.items():
             fields = {k: v for k, v in update.items() if k in ("query", "attempts", "best_score")}

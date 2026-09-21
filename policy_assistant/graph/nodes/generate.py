@@ -9,7 +9,6 @@ from policy_assistant.rag import enforce_grounding, format_docs
 
 
 def generate(state: AgentState) -> dict:
-    """ Put the retrieved passages in the prompt. If the model is not grounded in them, refuse. """
     docs = state["retrieved"]
 
     answer = build_answer_chain().invoke({

@@ -1,4 +1,4 @@
-""" Helpers for RAG: putting the retrieved passages in the prompt and checking the answer's citations """
+""" retrieved passages in the prompt and checking citations """
 
 from langchain_core.documents import Document
 
@@ -6,10 +6,7 @@ from policy_assistant.schemas.answer import Answer
 
 
 def format_docs(docs: list[Document]) -> str:
-    """ Turn each found doc into one long string that goes into the answer prompt.
-
-        Each passage is labelled with its source file so the model can cite it.
-    """
+    """ Turn the retrieved docs into the passage text for the prompt, labelled by source """
     if not docs:
         return "(no passages were found)"
 
@@ -25,11 +22,7 @@ def format_docs(docs: list[Document]) -> str:
 
 
 def enforce_grounding(answer: Answer, docs: list[Document]) -> Answer:
-    """ Make sure the model actually grounded itself, rather than just saying it did.
-
-        Citations that are not among the retrieved documents are dropped. If none
-        are left, the answer is treated as ungrounded.
-    """
+    """ Drop citations that were not retrieved; with none left, the answer is ungrounded """
     known = {doc.metadata.get("source") for doc in docs}
     valid_citations = [s for s in answer.sources if s in known]
 

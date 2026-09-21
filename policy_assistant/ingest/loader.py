@@ -1,4 +1,4 @@
-"""Load document files from disk and split them into chunks."""
+"""Load the document files and split them into chunks"""
 from pathlib import Path
 
 from langchain_core.documents import Document
@@ -8,7 +8,6 @@ from policy_assistant.config import DOCS_DIR
 
 
 def load_documents(docs_dir: Path = DOCS_DIR) -> list[Document]:
-    """One Document per .md/.txt file; metadata['source'] is the file name."""
     docs_dir = Path(docs_dir)
     
     if not docs_dir.is_dir():
@@ -21,10 +20,7 @@ def load_documents(docs_dir: Path = DOCS_DIR) -> list[Document]:
 
 
 def split_documents(docs: list[Document]) -> list[Document]:
-    """Split each document by its '#' and '##' headings, one chunk per section.
-
-    Headers stay inside the chunk text, and the section name is kept in metadata.
-    """
+    """Split each document by its headings, one chunk per section"""
     splitter = MarkdownHeaderTextSplitter(
         [("#", "title"), ("##", "section")],
         strip_headers=False,
